@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>teachers</title>
+
+   <!-- font awesome cdn link  -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+
+   <!-- custom css file link  -->
+   <link rel="stylesheet" href="/css/styles.css">
+<style>
+   .logo {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+    }
+    
+    .large-logo {
+      max-width: 100%;
+      max-height: 85px; /* Set your preferred maximum height */
+      height: auto;
+    }
+   .logo .small-logo{
+      
+      width: 112px;
+      height: 85px;
+      border-radius: 20px;
+  }
+   .logo img{
+      width: 100%;
+      height: 100%;
+   }
+   @media screen and (max-width: 1600px) {
+      .logo .large-logo {
+          display: block; /* Hide the large logo on small screens */
+      }
+      .logo .small-logo {
+          display: none; /* Show the small logo on small screens */
+      }
+  }
+  @media screen and (max-width: 600px) {
+      .logo .large-logo {
+          display: none; /* Hide the large logo on small screens */
+      }
+      .logo .small-logo {
+          display: block; /* Show the small logo on small screens */
+      }
+  }
+  /*admin*/
+  .form {
+   max-width: 400px;
+   margin: 50px auto;
+   padding: 20px;
+   background-color: gray;
+   border-radius: 8px;
+   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+   transition: box-shadow 0.3s ease; /* Add transition for smooth effect */
+ }
+ 
+ .form:hover {
+   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* Adjusted box shadow on hover */
+ }
+ 
+ label {
+   font-family: Arial, Helvetica, sans-serif;
+   font-weight: bold;
+   font-size: 10px;
+   display: block;
+   margin-bottom: 8px;
+   color: white;
+ }
+ 
+ .input1 {
+   width: 100%;
+   padding: 8px;
+   margin-bottom: 16px;
+   box-sizing: border-box;
+ }
+ 
+ .button1 {
+   background-color: #af4c96;
+   color: white;
+   padding: 10px;
+   border: none;
+   border-radius: 4px;
+   cursor: pointer;
+ }
+ 
+ .button1:hover {
+   background-color: #45a049;
+ }
+</style>
+</head>
+<body>
+
+<header class="header">
+   
+   <section class="flex">
+
+      <a href="#" class="logo">
+         <img class="large-logo" src="/images/redlogo.png">
+         <img class="small-logo" src="/images/block_logo.png" alt="Small Logo">
+      </a>
+
+      <form action="search.html" method="post" class="search-form">
+         <input type="text" name="search_box" required placeholder="search courses..." maxlength="100">
+         <button type="submit" class="fas fa-search"></button>
+      </form>
+
+      <div class="icons">
+         <div id="menu-btn" class="fas fa-bars"></div>
+         <div id="search-btn" class="fas fa-search"></div>
+         <div id="user-btn" class="fas fa-user"></div>
+         <div id="toggle-btn" class="fas fa-sun"></div>
+      </div>
+
+      <div class="profile">
+         <img src="/images/pic-1.jpg" class="image" alt="">
+         <h3 class="name"><%= user.username %></h3>
+          <p><%= user.role %></p>
+         <p class="role">College Admin</p>
+         <a href="/adminProfile/<%= userId %>" class="btn">view profile</a>
+         <div class="flex-btn">
+            <a href="/logout" class="option-btn">logout</a>
+            <a href="/update/<%= userId %>" class="option-btn">Update</a>
+         </div>
+      </div>
+
+   </section>
+
+</header>   
+
+<div class="side-bar">
+
+   <div id="close-btn">
+      <i class="fas fa-times"></i>
+   </div>
+
+   <div class="profile">
+      <img src="/images/pic-1.jpg" class="image" alt="">
+      <h3 class="name"><%= user.username %></h3>
+      <p><%= user.role %></p>
+      <p class="role">College Admin</p>
+      <a href="/adminProfile/<%= userId %>" class="btn">view profile</a>
+   </div>
+
+   <nav class="navbar">
+      <a href="/admin/<%= userId %>"><i class="fas fa-home"></i><span>Dashboard</span></a>
+      
+      <a href="/adminAttendance/<%= userId %>"><i class="fas fa-graduation-cap"></i><span>Attendance</span></a>
+      <a href="/adminAssignment/<%= userId %>"><i class="fa-solid fa-coins"></i></i><span>Assignment</span></a>
+      <a href="/createClass/<%= userId %>"><i class="fas fa-question"></i><span>Create Class</span></a>
+      <a href="/adminContact/<%= userId %>"><i class="fas fa-headset"></i><span>Contact Us</span></a>
+   </nav>
+
+</div>
+
+<section class="teachers">
+
+   <h1 class="heading">Create Class Online</h1>
+
+   <!-- <form action="" method="post" class="search-tutor">
+      <input type="text" name="search_box" placeholder="search My Courses..." required maxlength="100">
+      <button type="submit" class="fas fa-search" name="search_tutor"></button>
+   </form> -->
+   <form action="/createClass/<%= userId %>" method="post" class="form" id="createClassForm">
+    
+    <label for="username">Username</label>
+    <input type="text" id="username" name="username" class="input1" value="<%= user.username %>" readonly required>
+    <label for="college">College Name</label>
+    <select id="college" name="college" class="input1" required>
+        <option value="LNCT University - [LNCTU], Bhopal">LNCT University - [LNCTU], Bhopal</option>
+        <option value="Sagar Institute of Research and Technology - [SIRT], Bhopal">Sagar Institute of Research and Technology - [SIRT], Bhopal</option>
+        <option value="Kamla Nehru Mahavidyalaya, Bhopal">Kamla Nehru Mahavidyalaya, Bhopal</option>
+        <option value="Rajeev Gandhi College, Bhopal">Rajeev Gandhi College, Bhopal</option>
+        <option value="Career College of Law, Bhopal">Career College of Law, Bhopal</option>
+        <option value="Millennium College of Education - [MCE], Bhopal">Millennium College of Education - [MCE], Bhopal</option>
+        <option value="RKDF University, Bhopal">RKDF University, Bhopal</option>
+        <option value="IES College of Education, Bhopal">IES College of Education, Bhopal</option>
+        <option value="SAGE University, Bhopal">SAGE University, Bhopal</option>
+        <option value="Lakshmi Narain College of Technology - [LNCT], Bhopal">Lakshmi Narain College of Technology - [LNCT], Bhopal</option>
+        <option value="Technocrats Institute of Technology - [TIT] (Excellence), Bhopal">Technocrats Institute of Technology - [TIT] (Excellence), Bhopal</option>
+        <option value="Trinity Institute of Technology and Research, Bhopal">Trinity Institute of Technology and Research, Bhopal</option>
+        <option value="Bhabha University - [BU], Bhopal">Bhabha University - [BU], Bhopal</option>
+        <option value="Patel College of Science and Technology - [PCST], Bhopal">Patel College of Science and Technology - [PCST], Bhopal</option>
+        <option value="Bhopal Institute of Technology - [BIT], Bhopal">Bhopal Institute of Technology - [BIT], Bhopal</option>
+ </select>
+
+    <label for="graduation">Graduation</label>
+    <select id="graduation" name="graduation" class="input1" required>
+      <option value="bachelor">Bachelor's Degree</option>
+      <option value="master">Master's Degree</option>
+      <option value="phd">Ph.D.</option>
+    </select>
+
+    <label for="courseName">Course Name</label>
+    <select id="courseName" name="courseName" class="input1" required>
+      <option value="Master AI and Land Your Dream Job">Master AI and Land Your Dream Job</option>
+      <option value="Web 3 Development">Web 3 Development</option>
+      <option value="Artificial Intelligence (AI) and (ML)">Artificial Intelligence (AI) and (ML)</option>
+     
+    </select>
+    
+    <label for="time">Course Date and Time</label>
+    <input type="datetime-local" class="input1" id="time" name="time" required>
+    <input type="hidden" name="userId" value="<%= userId %>"><br>
+    <button type="submit" class="button1">Submit</button>
+    <div id="message"></div>
+  </form>
+ 
+
+<script>
+  document.getElementById('createClassForm').addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const formData = new FormData(form);
+    const messageDiv = document.getElementById('message');
+
+    try {
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: formData
+      });
+      
+      if (response.ok) {
+        messageDiv.textContent = 'Course created successfully!';
+        messageDiv.style.color = 'white'; // Style for success message
+      } else {
+        messageDiv.textContent = 'Failed to create course. Please try again later.';
+        messageDiv.style.color = 'red'; // Style for error message
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      messageDiv.textContent = 'Internal Server Error';
+      messageDiv.style.color = 'red'; // Style for error message
+    }
+  });
+</script>
+   <!-- <div class="box-container">
+
+      <div class="box offer">
+         <h3>become a tutor</h3>
+         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet, itaque ipsam fuga ex et aliquam.</p>
+         <a href="/logout" class="inline-btn">get started</a>
+      </div>
+
+      <div class="box">
+         <div class="tutor">
+            <img src="images/pic-2.jpg" alt="">
+            <div>
+               <h3>john deo</h3>
+               <span>developer</span>
+            </div>
+         </div>
+         <p>total playlists : <span>4</span></p>
+         <p>total videos : <span>18</span></p>
+         <p>total likes : <span>1208</span></p>
+         <a href="/teacher" class="inline-btn">view profile</a>
+      </div> -->
+
+      <!-- <div class="box">
+         <div class="tutor">
+            <img src="images/pic-3.jpg" alt="">
+            <div>
+               <h3>john deo</h3>
+               <span>developer</span>
+            </div>
+         </div>
+         <p>total playlists : <span>4</span></p>
+         <p>total videos : <span>18</span></p>
+         <p>total likes : <span>1208</span></p>
+         <a href="/teacher" class="inline-btn">view profile</a>
+      </div> -->
+
+      <!-- <div class="box">
+         <div class="tutor">
+            <img src="images/pic-4.jpg" alt="">
+            <div>
+               <h3>john deo</h3>
+               <span>developer</span>
+            </div>
+         </div>
+         <p>total playlists : <span>4</span></p>
+         <p>total videos : <span>18</span></p>
+         <p>total likes : <span>1208</span></p>
+         <a href="/teacher" class="inline-btn">view profile</a>
+      </div> -->
+
+      <!-- <div class="box">
+         <div class="tutor">
+            <img src="images/pic-5.jpg" alt="">
+            <div>
+               <h3>john deo</h3>
+               <span>developer</span>
+            </div>
+         </div>
+         <p>total playlists : <span>4</span></p>
+         <p>total videos : <span>18</span></p>
+         <p>total likes : <span>1208</span></p>
+         <a href="/teacher" class="inline-btn">view profile</a>
+      </div> -->
+
+      <!-- <div class="box">
+         <div class="tutor">
+            <img src="images/pic-6.jpg" alt="">
+            <div>
+               <h3>john deo</h3>
+               <span>developer</span>
+            </div>
+         </div>
+         <p>total playlists : <span>4</span></p>
+         <p>total videos : <span>18</span></p>
+         <p>total likes : <span>1208</span></p>
+         <a href="/teacher" class="inline-btn">view profile</a>
+      </div> -->
+
+      <!-- <div class="box">
+         <div class="tutor">
+            <img src="images/pic-7.jpg" alt="">
+            <div>
+               <h3>john deo</h3>
+               <span>developer</span>
+            </div>
+         </div>
+         <p>total playlists : <span>4</span></p>
+         <p>total videos : <span>18</span></p>
+         <p>total likes : <span>1208</span></p>
+         <a href="/teacher" class="inline-btn">view profile</a>
+      </div> -->
+
+      <!-- <div class="box">
+         <div class="tutor">
+            <img src="images/pic-8.jpg" alt="">
+            <div>
+               <h3>john deo</h3>
+               <span>developer</span>
+            </div>
+         </div>
+         <p>total playlists : <span>4</span></p>
+         <p>total videos : <span>18</span></p>
+         <p>total likes : <span>1208</span></p>
+         <a href="/teacher" class="inline-btn">view profile</a>
+      </div> -->
+
+   </div>
+   <%- include('what.ejs') %>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <footer class="footer">
+
+   &copy; copyright @ 2023 by <span>Blockcept.ai</span> | all rights reserved!
+
+</footer> -->
+
+<!-- custom js file link  -->
+<script src="/js/scripts.js"></script>
+
+   
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>update</title>
+
+   <!-- font awesome cdn link  -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+
+   <!-- custom css file link  -->
+   <link rel="stylesheet" href="/css/styles.css">
+<style>
+   .logo {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+    }
+    
+    .large-logo {
+      max-width: 100%;
+      max-height: 85px; /* Set your preferred maximum height */
+      height: auto;
+    }
+   .logo .small-logo{
+      
+      width: 112px;
+      height: 85px;
+      border-radius: 20px;
+  }
+   .logo img{
+      width: 100%;
+      height: 100%;
+   }
+   @media screen and (max-width: 1600px) {
+      .logo .large-logo {
+          display: block; /* Hide the large logo on small screens */
+      }
+      .logo .small-logo {
+          display: none; /* Show the small logo on small screens */
+      }
+  }
+  @media screen and (max-width: 600px) {
+      .logo .large-logo {
+          display: none; /* Hide the large logo on small screens */
+      }
+      .logo .small-logo {
+          display: block; /* Show the small logo on small screens */
+      }
+  }
+</style>
+</head>
+<body>
+
+<header class="header">
+   
+   <section class="flex">
+
+      <a href="#" class="logo">
+         <img class="large-logo" src="/images/redlogo.png">
+            <img class="small-logo" src="/images/block_logo.png" alt="Small Logo">
+      </a>
+
+      <form action="#" method="post" class="search-form">
+         <input type="text" name="search_box" required placeholder="search courses..." maxlength="100">
+         <button type="submit" class="fas fa-search"></button>
+      </form>
+
+      <div class="icons">
+         <div id="menu-btn" class="fas fa-bars"></div>
+         <div id="search-btn" class="fas fa-search"></div>
+         <div id="user-btn" class="fas fa-user"></div>
+         <div id="toggle-btn" class="fas fa-sun"></div>
+      </div>
+
+      <div class="profile">
+         <img src="/images/pic-1.jpg" class="image" alt="">
+         <h3 class="name"><%= user.username %></h3>
+         <p class="role">Student</p>
+         <a href="/profile/<%= userId %>" class="btn">view profile</a>
+         <div class="flex-btn">
+            <a href="/logout" class="option-btn">logout</a>
+            <a href="/update/<%= userId %>" class="option-btn">Update</a>
+         </div>
+      </div>
+
+   </section>
+
+</header>   
+
+<div class="side-bar">
+
+   <div id="close-btn">
+      <i class="fas fa-times"></i>
+   </div>
+
+   <div class="profile">
+      <!-- <img src="./images/pic-1.jpg" class="image" alt=""> -->
+      <img src="/images/pic-1.jpg" class="image" alt="User's Profile Picture">
+
+      <h3 class="name"><%= user.username %></h3>
+      <p class="role">Student</p>
+      <a href="/profile/<%= userId %>" class="btn">view profile</a>
+   </div>
+
+   <nav class="navbar">
+      <a href="/home/<%= userId %>"><i class="fas fa-home"></i><span>Dashboard</span></a>
+      
+      <a href="/courses/<%= userId %>"><i class="fas fa-chalkboard-user"></i><span>Online Class</span></a>
+      <a href="/my-courses/<%= userId %>"><i class="fas fa-graduation-cap"></i><span>My Courses</span></a>
+      <a href="/about/<%= userId %>"><i class="fas fa-tasks"></i><span>Assignment</span></a>
+      <a href="/attendance/<%= userId %>"><i class="fa-solid fa-clipboard-user"></i><span>Attendance</span></a>
+      <a href="/contact/<%= userId %>"><i class="fas fa-headset"></i><span>Contact Us</span></a>
+   </nav>
+
+</div>
+
+<section class="form-container">
+   <form action="/update" method="POST">
+      <h3>update profile</h3>
+      <p>Username</p>
+      <input type="text" id="firstName" name="firstName" value="<%= user.username %>" readonly  maxlength="50" class="box" readonly>
+      <!-- <p>LastName</p>
+      <input type="text" id="lastName" name="lastName" value=""  maxlength="50" class="box" readonly>  -->
+      <!-- <p>previous password</p>
+      <input type="password" name="old_pass" placeholder="enter your old password" maxlength="20" class="box">
+      <p>new password</p>
+      <input type="password" name="new_pass" placeholder="enter your old password" maxlength="20" class="box"> -->
+       <p>Email</p>
+      <input type="email" id="email" name="email" value="<%= user.email %>" readonly maxlength="20" class="box" readonly>
+      <p>Change Phone Number</p>
+      <input type="tel" id="number" name="number" placeholder="123-45-678" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" required maxlength="50" class="box">
+      <p>Change Password</p>
+      <input type="password" id="password" name="password"   maxlength="50" class="box">
+      <!-- <p>update pic</p>
+      <input type="file" accept="image/*" class="box"> -->
+      <input type="submit" value="update profile" name="submit" class="btn">
+   </form> 
+
+   
+   
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<footer class="footer">
+
+   &copy; copyright @ 2023 by <span>Blockcept.ai</span> | all rights reserved!
+
+</footer>
+
+<!-- custom js file link  -->
+<script src="/js/scripts.js"></script>
+
+   
+</body>
+</html>

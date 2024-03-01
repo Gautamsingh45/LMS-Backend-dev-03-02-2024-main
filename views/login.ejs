@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>login</title>
+
+   <!-- font awesome cdn link  -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+
+   <!-- custom css file link  -->
+   <link rel="stylesheet" href="/css/styles.css">
+  <style>
+   .logo {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+    }
+    
+    .large-logo {
+      max-width: 100%;
+      max-height: 85px; /* Set your preferred maximum height */
+      height: auto;
+    }
+   .logo .small-logo{
+      border-radius: 20px;
+      width: 112px;
+      height: 85px;
+  }
+   .logo img{
+      width: 100%;
+      height: 100%;
+   }
+   @media screen and (max-width: 1600px) {
+      .logo .large-logo {
+          display: block; /* Hide the large logo on small screens */
+      }
+      .logo .small-logo {
+          display: none; /* Show the small logo on small screens */
+      }
+  }
+  @media screen and (max-width: 600px) {
+      .logo .large-logo {
+          display: none; /* Hide the large logo on small screens */
+      }
+      .logo .small-logo {
+          display: block; /* Show the small logo on small screens */
+      }
+  }
+  </style>
+</head>
+<body>
+
+<header class="header">
+   
+   <section class="flex">
+
+      <a href="#" class="logo">
+         <img class="large-logo" src="/images/redlogo.png">
+            <img class="small-logo" src="/images/block_logo.png" alt="Small Logo">
+      </a>
+
+      <form action="#" method="post" class="search-form">
+         <input type="text" name="search_box" required placeholder="search courses..." maxlength="100">
+         <button type="submit" class="fas fa-search"></button>
+      </form>
+
+      <div class="icons">
+         <div id="menu-btn" class="fas fa-bars"></div>
+         <div id="search-btn" class="fas fa-search"></div>
+         <div id="user-btn" class="fas fa-user"></div>
+         <div id="toggle-btn" class="fas fa-sun"></div>
+      </div>
+
+      <div class="profile">
+         <img src="/images/pic-1.jpg" class="image" alt="">
+         <h3 class="name"><%= user.firstName  %> <%= user.lastName %></h3>
+         <p class="role">student</p>
+         <a href="/profile" class="btn">view profile</a>
+         <div class="flex-btn">
+            <a href="/logout" class="option-btn">logout</a>
+            <a href="/update/<%= userId %>" class="option-btn">Update</a>
+         </div>
+      </div>
+
+   </section>
+
+</header>   
+
+<div class="side-bar">
+
+   <div id="close-btn">
+      <i class="fas fa-times"></i>
+   </div>
+
+   <div class="profile">
+      <img src="images/pic-1.jpg" class="image" alt="">
+      <h3 class="name"><%= user.firstName  %> <%= user.lastName %></h3>
+      <p class="role">student</p>
+      <a href="/profile" class="btn">view profile</a>
+   </div>
+
+   <nav class="navbar">
+      <a href="/home"><i class="fas fa-home"></i><span>Dashboard</span></a>
+    
+      <a href="/courses"><i class="fas fa-graduation-cap"></i><span>Courses</span></a>
+      <a href="/teachers"><i class="fas fa-chalkboard-user"></i><span>My Courses</span></a>
+      <a href="/about"><i class="fas fa-question"></i><span>Assignment</span></a>
+      <a href="/contact"><i class="fas fa-headset"></i><span>Contact Us</span></a>
+   </nav>
+
+</div>
+
+<section class="form-container">
+
+   <form action="" method="post" enctype="multipart/form-data">
+      <h3>login now</h3>
+      <p>your email <span>*</span></p>
+      <input type="email" name="email" placeholder="enter your email" required maxlength="50" class="box">
+      <p>your password <span>*</span></p>
+      <input type="password" name="pass" placeholder="enter your password" required maxlength="20" class="box">
+      <input type="submit" value="Student Login" name="submit" class="btn">
+   </form>
+
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<footer class="footer">
+
+   &copy; copyright @ 2023 by <span>Blockcept.ai</span> | all rights reserved!
+
+</footer>
+
+<!-- custom js file link  -->
+<script src="/js/scripts.js"></script>
+
+   
+</body>
+</html>

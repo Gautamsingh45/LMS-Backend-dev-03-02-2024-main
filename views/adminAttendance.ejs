@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>home</title>
+
+   <!-- font awesome cdn link  -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+
+   <!-- custom css file link  -->
+   <link rel="stylesheet" href="/css/styles.css">
+<style>
+    .logo {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+      }
+      
+      .large-logo {
+        max-width: 100%;
+        max-height: 85px; /* Set your preferred maximum height */
+        height: auto;
+      }
+   .logo .small-logo{
+      
+      width: 112px;
+      height: 85px;
+      border-radius: 20px;
+  }
+   .logo img{
+      width: 100%;
+      height: 100%;
+   }
+   @media screen and (max-width: 1600px) {
+      .logo .large-logo {
+          display: block; /* Hide the large logo on small screens */
+      }
+      .logo .small-logo {
+          display: none; /* Show the small logo on small screens */
+      }
+  }
+  @media screen and (max-width: 600px) {
+      .logo .large-logo {
+          display: none; /* Hide the large logo on small screens */
+      }
+      .logo .small-logo {
+          display: block; /* Show the small logo on small screens */
+      }
+  }
+
+  /* admin css
+  ul {
+   list-style-type: none;
+   padding: 0;
+   
+ }
+ 
+ li {
+   border: 1px solid #ccc;
+   margin-bottom: 10px;
+   padding: 10px;
+   background-color: white;
+ }
+ 
+
+ li img {
+   max-width: 100%;
+   height: auto;
+   margin-bottom: 10px;
+ }
+ 
+
+ li div {
+   font-size: 16px;
+ }
+ 
+ 
+ li div strong {
+   font-size: 18px;
+   color: #333;
+ }
+ 
+ 
+ li div span {
+   color: #777;
+ }
+ */
+
+
+
+ 
+
+
+
+
+
+
+
+  .form2{
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  h2 {
+    background-color: #8e44ad;
+    color: #fff;
+    padding: 10px;
+    margin: 0;
+    border-radius: 4px 4px 0 0;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+
+  th, td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+  }
+
+  th {
+    background-color: #f2f2f2;
+  }
+
+  .submit-btn {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #8e44ad;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .submit-btn:hover {
+    background-color: #8e44ad;
+  }
+
+ 
+
+</style>
+</head>
+<body>
+
+<header class="header">
+   
+   <section class="flex">
+
+      <a href="/home" class="logo">
+         <!-- <div class="logo1"> -->
+            <img class="large-logo" src="/images/redlogo.png">
+            <img class="small-logo" src="/images/block_logo.png" alt="Small Logo">
+         <!-- </div> -->
+      </a>
+
+      <form class="search-form">  
+         <!-- action="#" method="post"  -->
+        <input type="text" id="search-input" name="search" required placeholder="search courses..." maxlength="100">
+         <button type="submit" class="fas fa-search" value="search"></button>
+      </form>
+
+      <div class="icons">
+         <div id="menu-btn" class="fas fa-bars"></div>
+         <div id="search-btn" class="fas fa-search"></div>
+         <div id="user-btn" class="fas fa-user"></div>
+         <div id="toggle-btn" class="fas fa-sun"></div>
+      </div>
+
+      <div class="profile">
+         <img src="/images/pic-1.jpg" class="image" alt="">
+         <h3 class="name"><%= user.username %></h3>
+         <p><%= user.role %></p>
+         <p class="role">College Admin</p>
+         <a href="/adminProfile/<%= userId %>" class="btn">view profile</a>
+         <div class="flex-btn">
+            <a href="/logout" class="option-btn">logout</a>
+            <a href="/update/<%= userId %>" class="option-btn">Update</a>
+         </div>
+      </div>
+
+   </section>
+
+</header>   
+
+<div class="side-bar">
+
+   <div id="close-btn">
+      <i class="fas fa-times"></i>
+   </div>
+
+   <div class="profile">
+      <img src="/images/pic-1.jpg" class="image" alt="">
+      <h3 class="name"><%= user.username %></h3>
+      <p><%= user.role %></p>
+      <p class="role">College Admin</p>
+      <a href="/adminProfile/<%= userId %>" class="btn">view profile</a>
+   </div>
+
+   <nav class="navbar">
+    <a href="/admin/<%= userId %>"><i class="fas fa-home"></i><span>Dashboard</span></a>
+      
+    <a href="/adminAttendance/<%= userId %>"><i class="fas fa-graduation-cap"></i><span>Attendance</span></a>
+    <a href="/adminAssignment/<%= userId %>"><i class="fa-solid fa-coins"></i></i><span>Assignment</span></a>
+    <a href="/createClass/<%= userId %>"><i class="fas fa-question"></i><span>Create Class</span></a>
+    <a href="/adminContact/<%= userId %>"><i class="fas fa-headset"></i><span>Contact Us</span></a>
+   </nav>
+
+</div>
+<section class="courses">
+
+   <h1 class="heading">Student Attendance</h1>
+  
+
+   <!-- <form method="post" action="/submit-attendance">
+    <% courses.forEach(student => { %>
+      <div>
+        <label>
+          <%= student.username %>
+          <%= student.email %>
+          <%= student.phone %>
+          <%= student.courseName%>
+          <input type="hidden" name="studentId" value="<%= student._id %>">
+          <select name="status">
+            <option value="present">Present</option>
+            <option value="absent">Absent</option>
+          </select>
+        </label>
+      </div>
+    <% }); %>
+   
+    <button type="submit">Submit Attendance</button>
+  </form> -->
+
+
+
+
+  <% 
+  // Group courses by courseName
+  const groupedCourses = {};
+  courses.forEach(student => {
+    if (!groupedCourses[student.courseName]) {
+      groupedCourses[student.courseName] = [];
+    }
+    groupedCourses[student.courseName].push(student);
+  });
+
+  // Iterate over grouped courses
+  Object.keys(groupedCourses).forEach(courseName => {
+    const students = groupedCourses[courseName];
+%>
+    <form method="post" action="/submit-attendance/<%= userId %>" class="form2">
+      <h2><%= courseName %></h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Attendance</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% students.forEach(student => { %>
+            <tr>
+              <td><%= student.username %></td>
+              <td><%= student.email %></td>
+              <td><%= student.phone %></td>
+              <td>
+                <input type="hidden" name="studentId" value="<%= student._id %>">
+                <input type="hidden" name="username" value="<%= student.username %>">
+                <input type="hidden" name="email" value="<%= student.email %>">
+                <input type="hidden" name="phone" value="<%= student.phone %>">
+                <select name="status">
+                  <option value="present">Present</option>
+                  <option value="absent">Absent</option>
+                </select>
+              </td>
+            </tr>
+          <% }); %>
+        </tbody>
+      </table>
+      <button class="submit-btn" type="submit" name="course" value="<%= courseName %>">
+        Submit
+      </button>
+    </form>
+<% }); %>
+
+
+</section>
+
+
+
+
+   
+<script src="/js/scripts.js"></script>
+
+   
+</body>
+</html>

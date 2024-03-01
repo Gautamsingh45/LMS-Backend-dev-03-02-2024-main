@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>video playlist</title>
+
+   <!-- font awesome cdn link  -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+
+   <!-- custom css file link  -->
+   <link rel="stylesheet" href="/css/styles.css">
+   <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"> -->
+
+   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+   <style>
+      .row1 {
+         display: flex;
+     }
+
+     .column1{
+         flex: 1;
+         padding: 20px;
+        
+         box-sizing: border-box;
+     }
+     .column1.left {
+      padding-left: 60px; /* Add some left padding */
+  }
+
+  .register-button {
+   background-color: blueviolet; /* Change to the desired violet color */
+   color:  white; /* Change to the desired blue color */
+   border: none;
+   padding: 10px 20px;
+   font-size: 16px;
+   cursor: pointer;
+   border-radius: 10px;
+   font-weight: bold;
+   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.register-button:hover {
+   background-color:  #555555;
+   
+}
+
+      .container1 {
+         max-width: 1200px;
+         margin: 0 auto;
+     }
+     
+     .course-module {
+         border: 1px solid #ccc;
+         padding: 10px;
+         margin: 10px;
+         background-color:  rgba(191, 189, 189, 0.591);
+        
+     }
+     
+     .module-contents {
+         list-style: none;
+         padding: 0;
+     }
+     
+     .module-contents li {
+         margin: 5px 0;
+         cursor: pointer;
+         border: 1px solid #ccc; /* Add border here */
+         padding: 10px; /* Add some padding */
+         background-color: white;
+     }
+     .module-contents .h1{
+      font-weight: bold;
+      color: #555555 ;
+      
+      font-size: 18px;
+     }
+     
+     .module-icon {
+         font-size: 20px;
+         margin-right: 5px;
+     }
+     
+     .description {
+         display: none;
+     }
+     .description .p1{
+      font-size: 13px;
+     }
+     
+     @media (max-width: 767px) {
+         .module-icon {
+             display: none;
+         }
+     }
+
+     .description .p1 ul li{
+      list-style: none;
+     }  
+     .logo {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+      }
+      
+      .large-logo {
+        max-width: 100%;
+        max-height: 85px; /* Set your preferred maximum height */
+        height: auto;
+      }
+      .logo .small-logo{
+         
+         width: 112px;
+         height: 85px;
+     }
+      .logo img{
+         width: 100%;
+         height: 100%;
+      }
+      @media screen and (max-width: 1600px) {
+         .logo .large-logo {
+             display: block; /* Hide the large logo on small screens */
+         }
+         .logo .small-logo {
+             display: none; /* Show the small logo on small screens */
+         }
+     }
+     @media screen and (max-width: 600px) {
+         .logo .large-logo {
+             display: none; /* Hide the large logo on small screens */
+         }
+         .logo .small-logo {
+             display: block; /* Show the small logo on small screens */
+         }
+     }
+   </style>
+</head>
+<body>
+
+<header class="header">
+   
+   <section class="flex">
+
+      <a href="#" class="logo">
+         <img class="large-logo" src="/images/redlogo.png">
+            <img class="small-logo" src="/images/block_logo.png" alt="Small Logo">
+      </a>
+
+      <form action="#" method="post" class="search-form">
+         <input type="text" name="search_box" required placeholder="search courses..." maxlength="100">
+         <button type="submit" class="fas fa-search"></button>
+      </form>
+
+      <div class="icons">
+         <div id="menu-btn" class="fas fa-bars"></div>
+         <div id="search-btn" class="fas fa-search"></div>
+         <div id="user-btn" class="fas fa-user"></div>
+         <div id="toggle-btn" class="fas fa-sun"></div>
+      </div>
+
+      <div class="profile">
+         <img src="/images/pic-1.jpg" class="image" alt="">
+         <h3 class="name"><%= user.username %></h3>
+         <p class="role">Student</p>
+         <a href="/profile/<%= userId %>" class="btn">view profile</a>
+         <div class="flex-btn">
+            <a href="/login" class="option-btn">logout</a>
+            <a href="/update/<%= userId %>" class="option-btn">Update</a>
+         </div>
+      </div>
+
+   </section>
+
+</header>   
+
+<div class="side-bar">
+
+   <div id="close-btn">
+      <i class="fas fa-times"></i>
+   </div>
+
+   <div class="profile">
+      <img src="/images/pic-1.jpg" class="image" alt="">
+      <h3 class="name"><%= user.username %></h3>
+      <p class="role">Student</p>
+      <a href="/profile/<%= userId %>" class="btn">view profile</a>
+   </div>
+
+   <nav class="navbar">
+    <a href="/home/<%= userId %>"><i class="fas fa-home"></i><span>Dashboard</span></a>
+      
+    <a href="/courses/<%= userId %>"><i class="fas fa-chalkboard-user"></i><span>Online Class</span></a>
+    <a href="/my-courses/<%= userId %>"><i class="fas fa-graduation-cap"></i><span>My Courses</span></a>
+    <a href="/about/<%= userId %>"><i class="fas fa-tasks"></i><span>Assignment</span></a>
+    <a href="/attendance/<%= userId %>"><i class="fa-solid fa-clipboard-user"></i><span>Attendance</span></a>
+    <a href="/contact/<%= userId %>"><i class="fas fa-headset"></i><span>Contact Us</span></a>
+   </nav>
+
+</div>
+
+<section class="playlist-details">
+
+   <h1 class="heading">Web 3 Development</h1>
+
+   <div class="row">
+        <div class="column">
+           
+            <div class="details">
+               <h3 >The simplest way to land your dream job in the age of Artificial Intelligence</h3><br>
+               <strong>Created by: Blockcept Technology Pvt Ltd.</strong>
+               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque minus aliquam eaque officiis dolore, reiciendis laudantium, consequuntur optio temporibus sapiente, totam soluta sequi rem similique sed enim 
+                  laboriosam? Praesentium, sequi! Lorem, ipsum dolor sit amet consectetur adipisicing elit. Inventore numquam, repudiandae assumenda explicabo itaque voluptate odio quod vel eaque corporis id aperiam iusto aspernatur dignissimos deleniti 
+                  quae et minus laborum? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Numquam eligendi praesentium explicabo blanditiis exercitationem maxime saepe, ea necessitatibus voluptas fuga rerum alias ipsam consectetur facere quis fugit officiis
+                   ex tempora?
+               </p>
+               <h3>This Course includes:</h3>
+               <div class="row1">
+                  <div class="column1 left">
+                      <h2><i class="fa-solid fa-tv" style="color: blueviolet;"></i>  22 hours on-demand video</h2><br>
+                      <h2><i class="fa-solid fa-terminal" style="color: blueviolet;"></i> 19 Practice exercises</h2><br>
+                      <h2><i class="fa-solid fa-file" style="color: blueviolet;"></i> 5 articles</h2>
+                      <!-- <p>Content for column 1 goes here.</p> -->
+                  </div>
+                  <div class="column1 left">
+                      <h2> <i class="fa-solid fa-mobile" style="color: blueviolet;"></i> Access on mobile and TV</h2><br>
+                      <h2><i class="fa-solid fa-certificate" style="color: blueviolet;"></i> Certificate of completion</h2>
+                      <!-- <p>Content for column 2 goes here.</p> -->
+                  </div>
+                  
+              </div>
+              <button class="register-button" type="button" onclick="window.location.href='/course-form/<%= userId %>'">Register</button>
+            </div>
+            
+        </div>
+        
+       
+       
+      <!-- <div class="column">
+         <form action="" method="post" class="save-playlist">
+            <button type="submit"><i class="far fa-bookmark"></i> <span>save playlist</span></button>
+         </form>
+   
+         <div class="thumb">
+            <img src="images/thumb-1.png" alt="">
+            <span>10 videos</span>
+         </div>
+      </div> -->
+      <!-- <div class="column">
+         <div class="tutor">
+              <img src="images/pic-2.jpg" alt="">
+            <div>
+               <h3>john deo</h3>
+               <span>21-10-2022</span>
+            </div> 
+         </div>
+   
+         <div class="details">
+            <h3>complete HTML tutorial</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum minus reiciendis, error sunt veritatis exercitationem deserunt velit doloribus itaque voluptate.</p>
+            <a href="/teacher" class="inline-btn">view profile</a>
+         </div>
+      </div> -->
+   </div>
+
+</section>
+
+ <section class="playlist-videos">
+
+   <h1 class="heading">Course Content</h1>
+   <div class="container1 course-module">
+      <!-- <h2>Module Title</h2> -->
+      <ul class="list-group module-contents">
+          <li class="list-group-item">
+              <span class="module-icon">&gt;</span> <span class="h1"> Module 1:  Unlock the potential of Artificial Intelligence with Prompt Engineering </span> 
+              <div class="description"><br>
+                 <strong class="p1">
+                    Become a pro with AI tools like
+                  <ul>
+
+                     <li>
+                        <i class="fa-solid fa-tv" style="color: blueviolet;"></i> ChartGPT
+                     </li>
+                     <li>
+                        <i class="fa-solid fa-tv" style="color: blueviolet;"></i> BARD
+                     </li>
+                  </ul>
+                 </strong> 
+              </div>
+          </li>
+          <li class="list-group-item">
+              <span class="module-icon">&gt;</span> <span class="h1">Module 2: Next-Gen Profile Building With AI Tools</span>
+              <div class="description"><br>
+               <strong class="p1">
+                    Learn with AI tools to create Professional
+                <ul>
+
+                   <li>
+                      <i class="fa-solid fa-tv" style="color: blueviolet;"></i> Resume
+                   </li>
+                   <li>
+                      <i class="fa-solid fa-tv" style="color: blueviolet;"></i> Cover Letter
+                   </li>
+                   <li>
+                     <i class="fa-solid fa-tv" style="color: blueviolet;"></i> Cutting edge profile for your next job hunt
+                  </li>
+                </ul>
+               </strong> 
+                 
+              </div>
+          </li>
+          <li class="list-group-item">
+              <span class="module-icon">&gt;</span> <span class="h1">Module 3: Investing in yourself. the Key to Professional Success </span>
+              <div class="description"><br>
+               <strong class="p1">
+                 
+                <ul>
+
+                   <li>
+                      <i class="fa-solid fa-tv" style="color: blueviolet;"></i> Understand how to build a Linkedin profile , bio , network
+                   </li>
+                   <li>
+                      <i class="fa-solid fa-tv" style="color: blueviolet;"></i> Learn to draft Professional and apt email , documents and PPTs
+                   </li>
+                </ul>
+               </strong> 
+                 
+              </div>
+          </li>
+          <li class="list-group-item">
+            <span class="module-icon">&gt;</span> <span class="h1">Module 4: The Art of Interviewing. Mastering in Soft Skills to Get Hired </span>
+            <div class="description"><br>
+               <strong class="p1">
+                 
+                <ul>
+
+                   <li>
+                      <i class="fa-solid fa-tv" style="color: blueviolet;"></i> Sharpen your interview skills using AI tools
+                   </li>
+                   
+                </ul>
+               </strong> 
+                
+            </div>
+        </li>
+        <li class="list-group-item">
+            <span class="module-icon">&gt;</span> <span class="h1">Module 5: Hands-On Final Project: Your Chance to Learn and Grow </span>
+            <div class="description"><br>
+              
+              
+            </div>
+        </li>
+      </ul>
+  </div>
+ 
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+<%- include('what.ejs') %>
+<footer class="footer">
+
+   &copy; copyright @ 2023 by <span>Blockcept.ai</span> | all rights reserved!
+
+</footer>
+
+<!-- custom js file link  -->
+<script src="/js/scripts.js"></script>
+
+<script>
+   document.addEventListener('DOMContentLoaded', function() {
+      const topics = document.querySelectorAll('.list-group-item');
+
+      topics.forEach(topic => {
+          topic.addEventListener('click', function() {
+              const description = this.querySelector('.description');
+              if (description.style.display === 'none' || description.style.display === '') {
+                  description.style.display = 'block';
+              } else {
+                  description.style.display = 'none';
+              }
+          });
+      });
+  });
+ </script>
+</body>
+</html>

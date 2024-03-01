@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>courses</title>
+
+   <!-- font awesome cdn link  -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+
+   <!-- custom css file link  -->
+   <link rel="stylesheet" href="/css/styles.css">
+<style>
+   .logo {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+    }
+    
+    .large-logo {
+      max-width: 100%;
+      max-height: 85px; /* Set your preferred maximum height */
+      height: auto;
+    }
+   .logo .small-logo{
+      
+      width: 112px;
+      height: 85px;
+      border-radius: 20px;
+  }
+   .logo img{
+      width: 100%;
+      height: 100%;
+   }
+   @media screen and (max-width: 1600px) {
+      .logo .large-logo {
+          display: block; /* Hide the large logo on small screens */
+      }
+      .logo .small-logo {
+          display: none; /* Show the small logo on small screens */
+      }
+  }
+  @media screen and (max-width: 600px) {
+      .logo .large-logo {
+          display: none; /* Hide the large logo on small screens */
+      }
+      .logo .small-logo {
+          display: block; /* Show the small logo on small screens */
+      }
+  }
+
+ 
+
+
+
+ strong {
+   color: #0277bd; /* Strong text color */
+ }
+ 
+ 
+
+
+
+
+
+
+
+ .course-card-container {
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: space-around;
+ }
+
+ .course-card {
+   background-color: #fff;
+   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+   margin: 10px;
+   padding: 20px;
+   border-radius: 8px;
+   width: 300px;
+ }
+
+ 
+
+ .datetime {
+   
+   font-family: Arial, Helvetica, sans-serif;
+ }
+
+ .button {
+   text-align: center;
+   margin-top: 10px;
+ }
+
+ .button a {
+   display: inline-block;
+   padding: 8px 16px;
+   background-color: #9f52c5;
+   color: #fff;
+   text-decoration: none;
+   border-radius: 4px;
+ }
+
+ .button a:hover {
+   background-color: #0056b3;
+ }
+ .course-card .font{
+   font-family: Arial, Helvetica, sans-serif;
+ }
+</style>
+
+</head>
+<body>
+
+<header class="header">
+   
+   <section class="flex">
+
+      <a href="#" class="logo">
+         <img class="large-logo" src="/images/redlogo.png">
+         <img class="small-logo" src="/images/block_logo.png" alt="Small Logo">
+      </a>
+
+      <form action="#" method="post" class="search-form">
+         <input type="text" name="search_box" required placeholder="search courses..." maxlength="100">
+         <button type="submit" class="fas fa-search"></button>
+      </form>
+
+      <div class="icons">
+         <div id="menu-btn" class="fas fa-bars"></div>
+         <div id="search-btn" class="fas fa-search"></div>
+         <div id="user-btn" class="fas fa-user"></div>
+         <div id="toggle-btn" class="fas fa-sun"></div>
+      </div>
+
+      <div class="profile">
+         <img src="/images/pic-1.jpg" class="image" alt="">
+         <h3 class="name"><%= user.username %></h3>
+         <p><%= user.role %></p>
+         <p class="role">Student</p>
+         <a href="/profile/<%= userId %>" class="btn">view profile</a>
+         <div class="flex-btn">
+            <a href="/logout" class="option-btn">logout</a>
+            <a href="/update/<%= userId %>" class="option-btn">Update</a>
+         </div>
+      </div>
+
+   </section>
+
+</header>   
+
+<div class="side-bar">
+
+   <div id="close-btn">
+      <i class="fas fa-times"></i>
+   </div>
+
+   <div class="profile">
+      <img src="/images/pic-1.jpg" class="image" alt="">
+      <h3 class="name"><%= user.username %></h3>
+      <p><%= user.role %></p>
+      <p class="role">Student</p>
+      <a href="/profile/<%= userId %>" class="btn">view profile</a>
+   </div>
+
+   <nav class="navbar">
+      <a href="/home/<%= userId %>"><i class="fas fa-home"></i><span>Dashboard</span></a>
+      
+      <a href="/courses/<%= userId %>"><i class="fas fa-chalkboard-user"></i><span>Online Class</span></a>
+      <a href="/my-courses/<%= userId %>"><i class="fas fa-graduation-cap"></i><span>My Courses</span></a>
+      <a href="/about/<%= userId %>"><i class="fas fa-tasks"></i><span>Assignment</span></a>
+      <a href="/attendance/<%= userId %>"><i class="fa-solid fa-clipboard-user"></i><span>Attendance</span></a>
+      <a href="/contact/<%= userId %>"><i class="fas fa-headset"></i><span>Contact Us</span></a>
+   </nav>
+
+</div>
+
+<section class="courses">
+
+   <h1 class="heading">Schedule Online Classes</h1>
+
+   <div class="course-card-container">
+      <% courses.forEach(course => { %>
+        <div class="course-card">
+          <div class="font">
+            <strong>College Name:</strong> <%= course.college %> <br>
+            <strong>Course Name:</strong> <%= course.courseName %> <br>
+            <strong>Time:</strong> <span class="datetime"><%= new Date(course.time).toLocaleString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', timeZoneName: 'short' }) %></span>
+          </div>
+          <div class="button">
+            <a class="a" href="https://meet.google.com/meh-hcwr-vor?authuser=0" target="_blank">Join</a>
+          </div>
+        </div>
+      <% }); %>
+    </div>
+    </section>
+    <!-- <button href="" class="button" onclick="joinCourse('https://meet.google.com/meh-hcwr-vor?authuser=0')">Join</button> -->
+   
+    <script>
+      
+    </script>
+      
+      <!-- <div class="box">
+         <div class="tutor">
+            <img src="images/pic-5.jpg" alt="">
+            <div class="info">
+               <h3>john deo</h3>
+               <span>21-10-2022</span>
+            </div>
+         </div>
+         <div class="thumb">
+            <img src="images/thumb-4.png" alt="">
+            <span>10 videos</span>
+         </div>
+         <h3 class="title">complete Boostrap tutorial</h3>
+         <a href="/playlist" class="inline-btn">view playlist</a>
+      </div> -->
+
+      <!-- <div class="box">
+         <div class="tutor">
+            <img src="images/pic-6.jpg" alt="">
+            <div class="info">
+               <h3>john deo</h3>
+               <span>21-10-2022</span>
+            </div>
+         </div>
+         <div class="thumb">
+            <img src="images/thumb-5.png" alt="">
+            <span>10 videos</span>
+         </div>
+         <h3 class="title">complete JQuery tutorial</h3>
+         <a href="/playlist" class="inline-btn">view playlist</a>
+      </div> -->
+
+      <!-- <div class="box">
+         <div class="tutor">
+            <img src="images/pic-7.jpg" alt="">
+            <div class="info">
+               <h3>john deo</h3>
+               <span>21-10-2022</span>
+            </div>
+         </div>
+         <div class="thumb">
+            <img src="images/thumb-6.png" alt="">
+            <span>10 videos</span>
+         </div>
+         <h3 class="title">complete SASS tutorial</h3>
+         <a href="/playlist" class="inline-btn">view playlist</a>
+      </div> -->
+
+      <!-- <div class="box">
+         <div class="tutor">
+            <img src="images/pic-8.jpg" alt="">
+            <div class="info">
+               <h3>john deo</h3>
+               <span>21-10-2022</span>
+            </div>
+         </div>
+         <div class="thumb">
+            <img src="images/thumb-7.png" alt="">
+            <span>10 videos</span>
+         </div>
+         <h3 class="title">complete PHP tutorial</h3>
+         <a href="/playlist" class="inline-btn">view playlist</a>
+      </div> -->
+
+      <!-- <div class="box">
+         <div class="tutor">
+            <img src="images/pic-9.jpg" alt="">
+            <div class="info">
+               <h3>john deo</h3>
+               <span>21-10-2022</span>
+            </div>
+         </div>
+         <div class="thumb">
+            <img src="images/thumb-8.png" alt="">
+            <span>10 videos</span>
+         </div>
+         <h3 class="title">complete MySQL tutorial</h3>
+         <a href="/playlist" class="inline-btn">view playlist</a>
+      </div> -->
+
+      <!-- <div class="box">
+         <div class="tutor">
+            <img src="images/pic-1.jpg" alt="">
+            <div class="info">
+               <h3>john deo</h3>
+               <span>21-10-2022</span>
+            </div>
+         </div>
+         <div class="thumb">
+            <img src="images/thumb-9.png" alt="">
+            <span>10 videos</span>
+         </div>
+         <h3 class="title">complete react tutorial</h3>
+         <a href="/playlist" class="inline-btn">view playlist</a>
+      </div> -->
+
+      
+
+   </div>
+
+</section>
+
+
+
+
+
+
+
+
+<%- include('what.ejs') %>
+
+
+
+
+<!-- <footer class="footer">
+
+   &copy; copyright @ 2023 by <span>Blockcept.ai</span> | all rights reserved!
+
+</footer> -->
+
+<!-- custom js file link  -->
+<script src="/js/scripts.js"></script>
+
+   
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!-- views/index.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp Click to Chat</title>
+    <!-- <link rel="stylesheet" href="./style.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+  
+    <style>
+        .whatsapp-button {
+            position: fixed;
+            bottom: 90px;
+            right: 40px;
+            z-index: 9999;
+        }
+        
+        #whatsappButton {
+            border-radius: 45px;
+            background-color: transparent; /* Set background color to transparent */
+            padding: 0; /* Remove padding */
+        }
+        
+        #whatsappButton i {
+            border-radius: 45px;
+            font-size: 50px;
+            color: green; /* Set icon color */
+        }
+        
+        #whatsappButton i:hover {
+            color: white; /* Change icon color on hover */
+            /* Change background color on hover */ 
+        }
+    </style>
+    
+    
+        
+   
+</head>
+<body>
+    <!-- <div class="whatsapp-button">
+        <button id="whatsappButton">
+        
+            <i  class="fa-brands fa-whatsapp"></i>
+        </button>
+    </div> -->
+    <div class="whatsapp-button" id="whatsappButton">
+        
+            <i  class="fa-brands fa-whatsapp"></i>
+        
+    </div>
+
+    <script>
+        document.getElementById('whatsappButton').addEventListener('click', function() {
+            var phoneNumber = '9661259888'; // Replace with your WhatsApp phone number, including country code
+            var message = 'Hello! I have a question.'; // You can customize the initial message
+        
+            if(isMobile()) {
+                openWhatsAppApp(phoneNumber, message);
+            } else {
+                openWhatsAppWeb(phoneNumber, message);
+            }
+        });
+        
+        function isMobile() {
+            return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        }
+        
+        function openWhatsAppWeb(phoneNumber, message) {
+            var whatsappWebLink = 'https://web.whatsapp.com/send?phone=' + phoneNumber + '&text=' + encodeURIComponent(message);
+            window.open(whatsappWebLink, '_blank');
+        }
+        
+        function openWhatsAppApp(phoneNumber, message) {
+            var whatsappAppLink = 'https://api.whatsapp.com/send?phone=' + phoneNumber + '&text=' + encodeURIComponent(message);
+            window.open(whatsappAppLink, '_blank');
+        }
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>home</title>
+
+   <!-- font awesome cdn link  -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+
+   <!-- custom css file link  -->
+   <link rel="stylesheet" href="/css/styles.css">
+<style>
+   .logo {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+    }
+    
+    .large-logo {
+      max-width: 100%;
+      max-height: 85px; /* Set your preferred maximum height */
+      height: auto;
+    }
+   .logo .small-logo{
+      
+      width: 112px;
+      height: 85px;
+      border-radius: 20px;
+  }
+   .logo img{
+      width: 100%;
+      height: 100%;
+   }
+   @media screen and (max-width: 1600px) {
+      .logo .large-logo {
+          display: block; /* Hide the large logo on small screens */
+      }
+      .logo .small-logo {
+          display: none; /* Show the small logo on small screens */
+      }
+  }
+  @media screen and (max-width: 600px) {
+      .logo .large-logo {
+          display: none; /* Hide the large logo on small screens */
+      }
+      .logo .small-logo {
+          display: block; /* Show the small logo on small screens */
+      }
+  }
+
+  /* admin css*/
+  ul {
+   list-style-type: none;
+   padding: 0;
+   
+ }
+ 
+ li {
+   border: 1px solid #ccc;
+   margin-bottom: 10px;
+   padding: 10px;
+   background-color: white;
+ }
+ 
+ /* Style for the course image (if applicable) */
+ li img {
+   max-width: 100%;
+   height: auto;
+   margin-bottom: 10px;
+ }
+ 
+ /* Style for the course details */
+ li div {
+   font-size: 16px;
+ }
+ 
+ /* Strong styling for the course name */
+ li div strong {
+   font-size: 18px;
+   color: #333;
+ }
+ 
+ /* Additional styling for other details */
+ li div span {
+   color: #777;
+ }
+
+
+
+
+
+ 
+
+  /* header {
+       flex: 1;
+       padding: 20px;
+       text-align: left;
+   }*/
+
+    select, .button1 {
+      display: inline-block; 
+       padding: 8px;
+       font-size: 14px;
+       border: 1px solid #ccc;
+       border-radius: 4px;
+       display: block;
+   }
+
+   table {
+       flex: 2;
+       width: 100%;
+      
+       border-collapse: collapse;
+       background-color: #fff;
+       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+   }
+
+   th, td {
+       border: 1px solid #ddd;
+       padding: 12px;
+       text-align: center;
+   }
+
+   th {
+       background-color: #8e44ad;
+       color: white;
+       cursor: pointer;
+   }
+
+   tr:hover {
+       background-color: #f0f0f0;
+   }
+
+  
+
+   /* Responsive styles */
+   @media (max-width: 600px) {
+       body {
+           flex-direction: column;
+           align-items: center;
+       }
+
+       table {
+           width: 100%;
+       }
+   }
+   .flex-container {
+      display: flex;
+      flex-direction: column; /* Arrange rows vertically */
+  }
+  
+  .flex-row {
+      display: flex;
+      margin-bottom: 10px; /* Adjust margin as needed */
+  }
+
+
+
+
+
+ /* search bos button1 sort category*/
+
+  .search-container {
+   display: flex;
+   justify-content: space-between; /* Align items with space between */
+   align-items: center; /* Align items vertically in the center */
+   margin-bottom: 20px; /* Adjust margin as needed */
+}
+
+.search-form1 {
+   display: flex;
+}
+
+#search-input1 {
+   padding: 8px;
+
+   font-size: 14px;
+   border: 1px solid #ccc;
+   border-radius: 4px 0 0 4px; /* Adjust border-radius as needed */
+}
+
+.fas.fa-search1 {
+   background-color: #8e44ad;
+   color: #fff;
+   border: 1px solid #8e44ad;
+   border-radius: 0 4px 4px 0; /* Adjust border-radius as needed */
+   cursor: pointer;
+   width: 40px;
+}
+
+.sort-filter-container {
+   display: flex;
+   align-items: center;
+}
+
+#category-filter {
+   padding: 8px;
+   font-size: 14px;
+   border: 1px solid #ccc;
+   border-radius: 4px 0 0 4px; /* Adjust border-radius as needed */
+}
+
+.button1 {
+   padding: 8px;
+   font-size: 14px;
+   background-color: #8e44ad;
+   color: #fff;
+   border: 1px solid #8e44ad;
+   border-radius: 0 4px 4px 0; /* Adjust border-radius as needed */
+   cursor: pointer;
+}
+
+
+/* skip button*/
+
+.pagination {
+   display: flex;
+   justify-content: center;
+   margin-top: 20px;
+ }
+
+ .pagination a {
+   color: white;
+   text-decoration: none;
+   padding: 8px 12px;
+   margin: 0 4px;
+   border: 1px solid #ddd;
+   border-radius: 4px;
+   transition: background-color 0.3s;
+   font-weight: bolder;
+   background-color: #8e44ad;
+  
+ }
+
+ .pagination a:hover {
+   background-color: #f0f0f0;
+   color: black;
+ }
+
+ .pagination .active {
+   background-color: #8e44ad;
+   color: rgb(255, 253, 253);
+ }
+
+
+
+ .button {
+   padding: 0px 20px;
+   
+   border: none;
+   background-color: #007bff;
+   color: white;
+   cursor: pointer;
+   border-radius: 5px;
+   text-align: center;
+ }
+ 
+ .button:hover {
+   background-color: #0056b3;
+ }
+ 
+ .button:active {
+   background-color: #0056b3;
+   transform: translateY(1px);
+ }
+ 
+ .select-button  {
+   color: red; /* Text color */
+   background-color: white; /* Background color */
+  
+   border: 2px solid red; /* Border */
+   border-radius: 4px; /* Border radius */
+   cursor: pointer;
+   outline: none;
+   transition: background-color 0.3s; /* Smooth transition on hover */
+ }
+ 
+ .select-button:hover {
+   background-color: #f0f0f0; /* Background color on hover */
+ }
+ #activate-button{
+   color: #8e44ad;
+   background-color: white;
+   border: 2px solid gray;
+   padding: 8px 16px; /* Padding */
+   border-radius: 12px;
+ }
+ #activate-button:hover{
+   background-color: #8e44ad;
+   color: white;
+ }
+ 
+ 
+
+  /* pop up css*/
+  .overlay {
+   display: none;
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background-color: rgba(0, 0, 0, 0.5);
+   z-index: 9999;
+ }
+ 
+ .confirmation-box {
+   position: fixed;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   background-color: white;
+   padding: 20px;
+   border-radius: 5px;
+   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+   z-index: 10000;
+ }
+ 
+ .message {
+   text-align: center;
+   margin-bottom: 20px;
+ }
+ 
+ .buttons {
+   text-align: center;
+ }
+ 
+ .confirm, .cancel {
+   padding: 10px 20px;
+   cursor: pointer;
+ }
+ 
+ .confirm {
+   background-color: #5cb85c;
+   color: white;
+   border: none;
+ }
+ 
+ .cancel {
+   background-color: #d9534f;
+   color: white;
+   border: none;
+   margin-left: 10px;
+ }
+ 
+</style>
+</head>
+<body>
+
+<header class="header">
+   
+   <section class="flex">
+
+      <a href="/home" class="logo">
+         <!-- <div class="logo1"> -->
+            <img class="large-logo" src="/images/redlogo.png">
+            <img class="small-logo" src="/images/block_logo.png" alt="Small Logo">
+         <!-- </div> -->
+      </a>
+
+      <form class="search-form">  
+         <!-- action="#" method="post"  -->
+        <input type="text" id="search-input" name="search" required placeholder="search courses..." maxlength="100">
+         <button type="submit" class="fas fa-search" value="search"></button>
+      </form>
+
+      <div class="icons">
+         <div id="menu-btn" class="fas fa-bars"></div>
+         <div id="search-btn" class="fas fa-search"></div>
+         <div id="user-btn" class="fas fa-user"></div>
+         <div id="toggle-btn" class="fas fa-sun"></div>
+      </div>
+
+      <div class="profile">
+         <img src="/images/pic-1.jpg" class="image" alt="">
+         <h3 class="name"><%= user.username %></h3>
+         <p><%= user.role %></p>
+         <p class="role">College Admin</p>
+         <a href="/adminProfile/<%= userId %>" class="btn">view profile</a>
+         <div class="flex-btn">
+            <a href="/logout" class="option-btn">logout</a>
+            <a href="/update/<%= userId %>" class="option-btn">Update</a>
+         </div>
+      </div>
+
+   </section>
+
+</header>   
+
+<div class="side-bar">
+
+   <div id="close-btn">
+      <i class="fas fa-times"></i>
+   </div>
+
+   <div class="profile">
+      <img src="/images/pic-1.jpg" class="image" alt="">
+      <h3 class="name"><%= user.username %></h3>
+      <p><%= user.role %></p>
+      <p class="role">College Admin</p>
+      <a href="/adminProfile/<%= userId %>" class="btn">view profile</a>
+   </div>
+
+   <nav class="navbar">
+      <a href="/admin/<%= userId %>"><i class="fas fa-home"></i><span>Dashboard</span></a>
+      
+      <a href="/adminAttendance/<%= userId %>"><i class="fas fa-graduation-cap"></i><span>Attendance</span></a>
+      <a href="/adminAssignment/<%= userId %>"><i class="fa-solid fa-coins"></i></i><span>Assignment</span></a>
+      <a href="/createClass/<%= userId %>"><i class="fas fa-question"></i><span>Create Class</span></a>
+      <a href="/adminContact/<%= userId %>"><i class="fas fa-headset"></i><span>Contact Us</span></a>
+   </nav>
+
+</div>
+<section class="courses">
+
+   <h1 class="heading">All Student</h1>
+  
+   <!-- <h1><%= user.role %></h1> -->
+   <!-- <form class="search-form">  -->
+      <!-- action="#" method="post"  -->
+      <!-- <input type="text" id="search-input" name="search" required placeholder="search courses..." maxlength="100">
+      <button type="submit" class="fas fa-search" value="search"></button>
+   </form>
+   <div class="flex-container">
+      <div class="flex-row">
+    <select id="category-filter">
+      <option value="">All Categories</option>
+      <option value="electronics">None of these</option> -->
+      <!-- <option value="clothing">Clothing</option>
+      <option value="books">Books</option> -->
+  <!-- </select>
+  <button class="button1" onclick="sortItems()">Sort A-Z</button> -->
+<!-- table -->
+
+</div>
+
+
+
+
+<div class="search-container">
+   <form class="search-form1">
+       <input type="text" id="search-input1" name="search" required placeholder="Search courses..." maxlength="100">
+       <button type="submit" class="fas fa-search ,fas fa-search1" value="search"></button>
+   </form>
+
+   <div class="sort-filter-container">
+       <select id="category-filter">
+           <option value="">All Categories</option>
+           <option value="electronics">None of these</option>
+       </select>
+       <button class="button1" onclick="sortItems()">Sort A-Z</button>
+   </div>
+</div>
+<!-- Add more flex rows as needed -->
+</div>
+  <!-- <table>
+   <thead>
+       <tr>
+           <th>User Name</th>
+           <th>Email</th>
+           <th>Phone</th>
+           <th>Course Name</th>
+           <th>Graduation</th>
+           <th>College</th>
+           <th>Status</th>
+       </tr>
+   </thead>
+   <tbody id="data-list">
+       <% courses.forEach(course => { %>
+           <tr data-course-id="<%= course._id %>">
+               <td><%= course.username %></td>
+               <td><%= course.email %></td>
+               <td><%= course.phone %></td>
+               <td><%= course.courseName %></td>
+               <td><%= course.graduation %></td>
+               <td><%= course.college %></td> 
+
+
+
+             
+
+
+
+                <td>
+
+
+                 
+                  <% if (course.status === 'pending') { %>
+                     <button class="select-button" onclick="toggleSelection('<%= course._id %>')">Select</button>
+                   <% } else { %>
+                     (Active)
+                   <% } %>
+                </td>
+               
+           </tr>
+       <% }); %>
+   </tbody>
+</table>
+<br>
+ 
+  <button  id="activate-button" style="display: none;" onclick="activateSelected()">Activate Selected</button> -->
+  
+  <!-- test end -->
+
+
+
+
+
+  <table id="data-table">
+   <thead>
+     <tr>
+       <th>Select</th>
+       <th>First Name</th>
+       <th>Last Name</th>
+       <th>Username</th>
+       <th>Email</th>
+       <th>Phone</th>
+       <th>Course Name</th>
+       <th>Graduation</th>
+       <th>College</th>
+       <th>Status</th>
+     </tr>
+   </thead>
+   <tbody id="data-list">
+     <% courses.forEach(course => { %>
+     <tr data-course-id="<%= course._id %>">
+       <td><input type="checkbox" class="select-checkbox" data-course-id="<%= course._id %>"></td>
+       <td><%= course.firstName %></td>
+       <td><%= course.lastName %></td>
+       <td><%= course.username %></td>
+       <td><%= course.email %></td>
+       <td><%= course.phone %></td>
+       <td><%= course.courseName %></td>
+       <td><%= course.graduation %></td>
+       <td><%= course.college %></td>
+       <td>
+         <% if (course.status === 'pending') { %>
+         <span class="status pending" style="color: red; font-weight:bold">Pending</span>
+         <% } else { %>
+         <span class="status active" style="color: #5cb85c; font-weight:bold">Active</span>
+         <% } %>
+       </td>
+     </tr>
+     <% }); %>
+   </tbody>
+ </table>
+ <br>
+
+ <div class="overlay" id="overlay">
+   <div class="confirmation-box" id="confirmation-box">
+     <div class="message" id="confirmation-message">Are you sure you want to activate selected courses?</div>
+     <div class="buttons">
+       <button class="confirm" id="confirm-button">Yes</button>
+       <button class="cancel" id="cancel-button">No</button>
+     </div>
+   </div>
+ </div>
+
+ <button id="activate-button" style="display: none;">Activate Selected</button>
+ 
+
+
+
+
+<div class="pagination">
+   <% for (let j = 1; j <= totalPages; j++) { %>
+     <a href="?page=<%= j %>" class="<%= currentPage === j ? 'active' : '' %>"><%= j %></a>
+   <% } %>
+ </div>
+<!-- table -->
+  
+
+  
+   <!-- <div class="box-container">
+
+      <div class="box">
+         <div class="tutor">
+            <img src="/images/Dream.jpg" alt="">
+            <div class="info">
+               <h3>College Panel</h3> -->
+               <!-- <span>21-10-2022</span> -->
+            <!-- </div>
+         </div>
+         <div class="thumb">
+            <img src="/images/col.jpg" alt=""> -->
+            <!-- <span>10 videos</span> -->
+         <!-- </div>
+         <h3 class="title">Let's start with Blockcept.ai</h3>
+         <a href="" class="inline-btn">Create</a>
+      </div>
+
+      <div class="box">
+         <div class="tutor">
+            <img src="/images/Dream.jpg" alt="">
+            <div class="info">
+               <h3>Admin Panel</h3> -->
+               <!-- <span>21-10-2022</span>
+            </div>
+         </div>
+         <div class="thumb">
+            <img src="/images/Amin.jpg" alt=""> -->
+            <!-- <span>10 videos</span> -->
+         <!-- </div>
+         <h3 class="title">Let's start with Blockcept.ai</h3>
+         <a href="/playlist" class="inline-btn">Create</a>
+      </div>
+
+      
+
+      
+
+   </div> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <footer class="footer">
+
+   &copy; copyright @ 2023 by <span>Blockcept.ai</span> | all rights reserved!
+   
+</footer> -->
+
+
+<!-- custom js file link  -->
+<script src="/js/scripts.js"></script>
+<script>
+   document.addEventListener('DOMContentLoaded', function() {
+      const overlay = document.getElementById('overlay');
+      const confirmationBox = document.getElementById('confirmation-box');
+      const confirmButton = document.getElementById('confirm-button');
+      const cancelButton = document.getElementById('cancel-button');
+      const activateButton = document.getElementById('activate-button');
+      const dataList = document.getElementById('data-list');
+      const selectCheckboxes = document.querySelectorAll('.select-checkbox');
+      let selectedRows = [];
+    
+      dataList.addEventListener('change', function(event) {
+        if (event.target.classList.contains('select-checkbox')) {
+          toggleSelection(event.target.dataset.courseId);
+        }
+      });
+    
+      function toggleSelection(courseId) {
+        const index = selectedRows.indexOf(courseId);
+        if (index === -1) {
+          selectedRows.push(courseId);
+        } else {
+          selectedRows.splice(index, 1);
+        }
+        updateActivateButtonVisibility();
+      }
+    
+      function updateActivateButtonVisibility() {
+        if (selectedRows.length > 0) {
+          activateButton.style.display = 'block';
+        } else {
+          activateButton.style.display = 'none';
+        }
+      }
+    
+      activateButton.addEventListener('click', function() {
+        openConfirmationBox();
+      });
+    
+      function openConfirmationBox() {
+        overlay.style.display = 'block';
+        confirmationBox.style.display = 'block';
+      }
+    
+      confirmButton.addEventListener('click', function() {
+        closeConfirmationBox();
+        activateSelected();
+      });
+    
+      cancelButton.addEventListener('click', function() {
+        closeConfirmationBox();
+      });
+    
+      function closeConfirmationBox() {
+        overlay.style.display = 'none';
+        confirmationBox.style.display = 'none';
+      }
+    
+      async function activateSelected() {
+        try {
+          for (const courseId of selectedRows) {
+            const response = await fetch(`/activate-course/${courseId}`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+            });
+            if (!response.ok) {
+              throw new Error(`Failed to activate course ${courseId}`);
+            }
+            const row = document.querySelector(`tr[data-course-id="${courseId}"]`);
+            row.querySelector('.status').textContent = 'Active';
+           
+          }
+          selectedRows = []; // Clear selected rows after activation
+          updateActivateButtonVisibility();
+        } catch (error) {
+          console.error('Error activating courses:', error);
+        }
+      }
+    });
+    
+</script>
+
+
+   
+</body>
+</html>
