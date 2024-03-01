@@ -21,8 +21,8 @@ module.exports = function(app) {
 //  register and admin register
 app.get('/', (req, res) => {
   errorMessage = '';
-  // res.render('register',{ errorMessage});
-  res.render('signin');
+   res.render('register',{ errorMessage});
+ 
 });
 
   app.post(

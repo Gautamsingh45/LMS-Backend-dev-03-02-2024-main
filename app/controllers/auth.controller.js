@@ -8,7 +8,8 @@ const randomstring = require('randomstring');
 const { v4: uuidv4 } = require('uuid');
 var jwt = require("jsonwebtoken");
 
-var bcrypt = require("bcryptjs");
+// var bcrypt = require("bcryptjs");
+var bcrypt = require("bcrypt");
 
 const transporter = nodemailer.createTransport({
   service: 'gmail',
@@ -118,66 +119,46 @@ exports.verify = async (req, res) => {
 };
 
 exports.signin = async (req, res) => {
-  
   try {
-    const { username } = req.body;
-  const user1 = await User.findOne({ username });
- 
-  if (user1 && user1.role === "LNCT University - [LNCTU], Bhopal"||user1.role === "Technocrats Institute of Technology - [TIT] (Excellence), Bhopal"||user1.role === "Sagar Institute of Research and Technology - [SIRT], Bhopal"||user1.role === "Kamla Nehru Mahavidyalaya, Bhopal"||user1.role === "Rajeev Gandhi College, Bhopal"||user1.role === "Career College of Law, Bhopal"||user1.role === "Millennium College of Education - [MCE], Bhopal"||user1.role === "RKDF University, Bhopal"||user1.role === "IES College of Education, Bhopal"||user1.role === "SAGE University, Bhopal"||user1.role === "Lakshmi Narain College of Technology - [LNCT], Bhopal"||user1.role === "Technocrats Institute of Technology - [TIT] (Excellence), Bhopal"||user1.role === "Trinity Institute of Technology and Research, Bhopal"||user1.role === "Bhabha University - [BU], Bhopal"||user1.role === "Patel College of Science and Technology - [PCST], Bhopal"||user1.role === "Bhopal Institute of Technology - [BIT], Bhopal"){
-    // req.session.user = user;
-    //  res.send(`Login successful! Welcome, ${username}. Your role is ${user1.role}.`);
-    // res.render('admin')
-    res.redirect(`/admin/${user1._id}`);
-  }
-  else if(user1.username=="Admin"){
-    res.render('adminRegister');
-  }
-  else{
-   
-    const user = await User.findOne({ username: req.body.username }).populate(
-      "roles",
-      "-__v"
-    );
+    const { usernameOrEmail, password } = req.body;
 
+    // Find a user by username or email
+    const user = await User.findOne({
+      $or: [
+        { username: usernameOrEmail },
+        { email: usernameOrEmail }
+      ]
+    }).populate("roles", "-__v");
+
+    // If no user is found, return an error
     if (!user) {
-      return res.status(404).send({ message: "User Not found." });
+      return res.status(400).render('register', { errorMessage: "User not found." });
     }
 
-    const passwordIsValid = bcrypt.compareSync(
-      req.body.password,
-      user.password
-    );
+    // Check if the user's email is verified
+    if (!user.isVerified) {
+      return res.status(400).render('register', { errorMessage: "Email is not verified." });
+    }
 
+    // Check if the provided password is valid
+    const passwordIsValid = bcrypt.compareSync(password, user.password);
     if (!passwordIsValid) {
-      return res.status(401).send({
-        accessToken: null,
-        message: "Invalid Password!",
-      });
+      return res.status(400).render('register', { errorMessage: "Invalid password." });
     }
-   
 
-    // const token = jwt.sign({ id: user.id }, config.secret, {
-    //   algorithm: "HS256",
-    //   allowInsecureKeySizes: true,
-    //   expiresIn: 86400, // 24 hours
-    // });
+    // Check if the user is an admin based on their username
+    if (user.username === "Admin") {
+      return res.render('adminRegister');
+    }
 
-    // const authorities = user.roles.map(
-    //   (role) => "ROLE_" + role.name.toUpperCase()
-    // );
-
-    // res.status(200).send({
-    //   id: user._id,
-    //   username: user.username,
-    //   email: user.email,
-    //   roles: authorities,
-    //   accessToken: token,
-    // });
-    // const role = await User.findOne({role: req.body.role}).exec();
-    
-    res.redirect(`/home/${user._id}`);
-  }
+    // Redirect the user to the appropriate page based on their role
+    if (user.role === "LNCT University - [LNCTU], Bhopal" || user.role === "Technocrats Institute of Technology - [TIT] (Excellence), Bhopal" || user.role === "Sagar Institute of Research and Technology - [SIRT], Bhopal" ) {
+      return res.redirect(`/admin/${user._id}`);
+    } else {
+      return res.redirect(`/home/${user._id}`);
+    }
   } catch (err) {
-    res.status(500).send({ message: err });
+    console.error(err);
+    res.status(400).render('register', { errorMessage: "Invalid username or password." });
   }
 };
