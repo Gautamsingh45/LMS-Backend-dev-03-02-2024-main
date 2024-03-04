@@ -17,8 +17,8 @@ module.exports = function(app) {
     );
     next();
   });
-// Render the s ign-up page
-//  register and admin register
+
+
 app.get('/', (req, res) => {
   errorMessage = '';
    res.render('register',{ errorMessage});
@@ -34,32 +34,10 @@ app.get('/', (req, res) => {
     controller.signup
   );
 
-  app.post("/verify",controller.verify);
+app.post("/verify",controller.verify);
 
+app.post("/api/auth/signin", controller.signin);
 
-  app.post("/api/auth/signin", controller.signin);
-  // ----------
-  // app.post('/confirmation',controller.confirmed);
-  
-  // start
-  
-// ----------
-
-// Existing server-side route for checking username availability
-// app.get('/check-username/:username', async (req, res) => {
-//   const { username } = req.params;
-//   try {
-//     const user = await User.findOne({ username });
-//     if (user) {
-//       res.send('Username is not available');
-//     } else {
-//       res.send('Username is available');
-//     }
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).send('Internal Server Error');
-//   }
-// });
 app.get('/check-username/:username', async (req, res) => {
   const username = req.params.username;
 
@@ -72,26 +50,11 @@ app.get('/check-username/:username', async (req, res) => {
           res.send('Username is available');
       }
   } catch (error) {
-      console.error(error);
+      // console.error(error);
       res.status(500).send('Internal Server Error');
   }
 });
 
-// New server-side route for checking email availability
-// app.get('/check-email/:email', async (req, res) => {
-//   const { email } = req.params;
-//   try {
-//     const user = await User.findOne({ email });
-//     if (user) {
-//       res.send('Email is already registered');
-//     } else {
-//       res.send('Email is available');
-//     }
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).send('Internal Server Error');
-//   }
-// });
 
 app.get('/check-email/:email', async (req, res) => {
   const { email } = req.params;
@@ -107,7 +70,7 @@ app.get('/check-email/:email', async (req, res) => {
       res.send('Email is available');
     }
   } catch (error) {
-    console.error(error);
+    // console.error(error);
     res.status(500).send('Internal Server Error');
   }
 });
@@ -123,19 +86,10 @@ app.get('/check-username-email/:usernameOrEmail', async (req, res) => {
       });
       res.json({ exists: !!user });
   } catch (error) {
-      console.error(error);
+      // console.error(error);
       res.status(500).send('Internal Server Error');
   }
 });
-
-
-
-
-
-
-
-
-
 
 app.get('/home/:userId',async (req, res) => {
   const userId = req.params.userId;
@@ -163,15 +117,13 @@ app.get('/about/:userId', async (req, res) => {
       college: { $in: uniqueColleges },
     }).populate('user').exec();
 
-    console.log(courses);
+    // console.log(courses);
     res.render('about', { user,courses, userId });
   } catch (error) {
-    console.error(error);
+    // console.error(error);
     res.status(500).send('Internal Server Error');
   }
 });
-
-
 
 app.get('/admin/:userId', async (req, res) => {
   const userId = req.params.userId;
@@ -229,11 +181,6 @@ app.get('/admin/:userId', async (req, res) => {
 
     const totalPages = Math.ceil(count / limit);
 
-    // const course = await Course.findByIdAndUpdate(userId, { status: 'active' }, { new: true });
-
-    // if (!course) {
-    //   return res.status(404).send('Course not found');
-    // }
     const allCourses = await Course.find({ college: user.role}).exec();
 
 
@@ -246,7 +193,7 @@ app.get('/admin/:userId', async (req, res) => {
       allCourses,
     });
   } catch (error) {
-    console.error(error);
+    // console.error(error);
     res.status(500).send('Internal Server Error');
   }
 });
@@ -264,15 +211,10 @@ app.post('/activate-course/:courseId', async (req, res) => {
 
     res.json({ status: 'success', course: updatedCourse });
   } catch (error) {
-    console.error('Error activating course:', error);
+    // console.error('Error activating course:', error);
     res.status(500).json({ status: 'error', error: 'Internal Server Error' });
   }
 });
-
-
-
-
-
 
 
 app.get('/confirmation', (req, res) => {
@@ -284,11 +226,11 @@ app.get('/contact/:userId', async(req, res) => {
     // Fetch all courses for the specified user from the database
     const courses = await Course.find({ user: userId }).exec();
     const course = await createClass.find({ user: userId }).exec();
-    console.log(course);
+    // console.log(course);
     const user = await User.findById(userId).exec(); 
     res.render('contact', { user,courses, userId });
 } catch (error) {
-    console.error(error);
+    // console.error(error);
     res.status(500).send('Internal Server Error');
 }
 });
@@ -314,7 +256,7 @@ app.get('/courses/:userId', async (req, res) => {
 
     res.render('courses', { courses, userId, user });
   } catch (error) {
-    console.error(error);
+    // console.error(error);
     res.status(500).send('Internal Server Error');
   }
 });
@@ -333,7 +275,7 @@ app.get('/playlist/:userId', async(req, res) => {
     res.render('playlist', {user, courses, userId });
     
 } catch (error) {
-    console.error(error);
+    // console.error(error);
     res.status(500).send('Internal Server Error');
 }
 });
@@ -345,7 +287,7 @@ app.get('/playlist2/:userId', async(req, res) => {
     const user = await User.findById(userId).exec();
     res.render('playlist2', {user, courses, userId });
 } catch (error) {
-    console.error(error);
+    // console.error(error);
     res.status(500).send('Internal Server Error');
 }
 });
@@ -357,7 +299,7 @@ app.get('/playlist3/:userId', async(req, res) => {
     const user = await User.findById(userId).exec();
     res.render('playlist3', {user, courses, userId });
 } catch (error) {
-    console.error(error);
+    // console.error(error);
     res.status(500).send('Internal Server Error');
 }
 });
@@ -369,7 +311,7 @@ app.get('/profile/:userId',async (req, res) => {
     const user = await User.findById(userId).exec();
     res.render('profile', {user, courses, userId });
 } catch (error) {
-    console.error(error);
+    // console.error(error);
     res.status(500).send('Internal Server Error');
 }
 });
@@ -381,7 +323,7 @@ app.get('/teacher_profile/:userId', async(req, res) => {
     const user = await User.findById(userId).exec();
     res.render('teacher_profile', { user,courses, userId });
 } catch (error) {
-    console.error(error);
+    // console.error(error);
     res.status(500).send('Internal Server Error');
 }
 });
@@ -393,7 +335,7 @@ app.get('/teachers/:userId', async(req, res) => {
     const user = await User.findById(userId).exec();
     res.render('teachers', {user, courses, userId });
 } catch (error) {
-    console.error(error);
+    // console.error(error);
     res.status(500).send('Internal Server Error');
 }
 });
@@ -405,7 +347,7 @@ app.get('/update/:userId', async(req, res) => {
     const user = await User.findById(userId).exec();
     res.render('update', {user, courses, userId });
 } catch (error) {
-    console.error(error);
+    // console.error(error);
     res.status(500).send('Internal Server Error');
 }
 });
@@ -429,21 +371,11 @@ app.get('/course-form/:userId', async (req, res) => {
       const userId = req.params.userId;
       
       const users = await User.find().exec();
-    // Log the fetched classes to check if they are retrieved
-    // console.log('classes:', classes);
-   
-      const user = await User.findById(userId).exec();
-        //  console.log(user)
-    //      const existingCourse = await Course.findOne({ courseName: 'Master AI and Land Your Dream Job' }).exec();
-
-    // if (existingCourse) {
-    //   // Course with this name already exists
-    //   return res.status(400).send('Course with this name already exists');
-    // }
+      const user = await User.findById(userId).exec();   
     errorMessage = '';
       res.render('course-form', { user,users, userId , errorMessage});
   } catch (error) {
-      console.error(error);
+      // console.error(error);
       res.status(500).send('Internal Server Error');
   }
 });
@@ -463,10 +395,6 @@ app.post('/create-course/:userId', async (req, res) => {
           // Check if the courseName already exists
           const existingCourse = await Course.findOne({ courseName: courseName, username: username }).exec();
 
-          // if (existingCourse) {
-          //   // return res.status(400).send('Course with this name and username already exists');
-          //   return res.render('course-form', { user, userId , errorMessage: 'Course with this name and college already exists' })
-          // }
           if (existingCourse) {
             errorMessage = 'Course with this name and college already exists'; // Set errorMessage if course already exists
             return res.render('course-form', { user, userId, errorMessage });
@@ -505,7 +433,7 @@ app.post('/create-course/:userId', async (req, res) => {
       
       res.render('my-courses', { courses, user,userId });
   } catch (error) {
-      console.error(error);
+      // console.error(error);
       res.status(500).send('Internal Server Error');
   }
 });
@@ -521,7 +449,7 @@ app.get('/my-courses/:userId', async (req, res) => {
       const user = await User.findById(userId).exec();
       res.render('my-courses', { courses, user,userId});
   } catch (error) {
-      console.error(error);
+      // console.error(error);
       res.status(500).send('Internal Server Error');
   }
 });
@@ -540,13 +468,12 @@ app.get('/createClass/:userId',async(req,res)=>{
     
     const users = await User.find().exec();
   // Log the fetched classes to check if they are retrieved
-  // console.log('classes:', classes);
     const user = await User.findById(userId).exec();
-       console.log(user)
+      //  console.log(user)
        errorMessage = '';
        res.render('createClass', { user,users, userId,errorMessage});
 } catch (error) {
-    console.error(error);
+    // console.error(error);
     res.status(500).send('Internal Server Error');
 }
 })
@@ -558,7 +485,7 @@ app.post('/createClass/:userId', async (req, res) => {
 
   try {
       // Check if the user exists
-      console.log('Received request with userId:', userId);
+      // console.log('Received request with userId:', userId);
       const user = await User.findById(userId).exec();
       
       
@@ -593,7 +520,7 @@ app.post('/createClass/:userId', async (req, res) => {
       const users = await User.find().exec();
       res.status(400).render('createClass', { errorMessage: "Course created successfully!" ,user,userId,users});
   } catch (error) {
-      console.error(error);
+      // console.error(error);
       res.status(500).send('Internal Server Error');
   }
 });
@@ -606,10 +533,8 @@ app.get('/adminAttendance/:userId',async(req,res)=>{
     const userId = req.params.userId;
     
     const users = await User.find().exec();
-  // Log the fetched classes to check if they are retrieved
-  // console.log('classes:', classes);
     const user = await User.findById(userId).exec();
-       console.log(user)
+      //  console.log(user)
        const courses = await Course.find({
               
               college: user.role
@@ -620,7 +545,7 @@ app.get('/adminAttendance/:userId',async(req,res)=>{
     
     res.render('adminAttendance', {courses, user,users, userId});
 } catch (error) {
-    console.error(error);
+    // console.error(error);
     res.status(500).send('Internal Server Error');
 }
 })
@@ -653,10 +578,8 @@ app.get('/adminAssignment/:userId',async(req,res)=>{
     const userId = req.params.userId;
     
     const users = await User.find().exec();
-  // Log the fetched classes to check if they are retrieved
-  // console.log('classes:', classes);
     const user = await User.findById(userId).exec();
-       console.log(user)
+      //  console.log(user)
        const courses = await Course.find({
               
               college: user.role
@@ -681,10 +604,9 @@ app.get('/adminContact/:userId',async(req,res)=>{
     const userId = req.params.userId;
     
     const users = await User.find().exec();
-  // Log the fetched classes to check if they are retrieved
-  // console.log('classes:', classes);
+  
     const user = await User.findById(userId).exec();
-       console.log(user)
+      //  console.log(user)
        const courses = await Course.find({
               
               college: user.role
@@ -695,7 +617,7 @@ app.get('/adminContact/:userId',async(req,res)=>{
     
     res.render('adminContact', {courses, user,users, userId});
 } catch (error) {
-    console.error(error);
+    // console.error(error);
     res.status(500).send('Internal Server Error');
 }
 })
@@ -707,10 +629,9 @@ app.get('/adminProfile/:userId',async (req, res) => {
     const userId = req.params.userId;
     
     const users = await User.find().exec();
-  // Log the fetched classes to check if they are retrieved
-  // console.log('classes:', classes);
+  
     const user = await User.findById(userId).exec();
-       console.log(user)
+      //  console.log(user)
        const courses = await Course.find({
               
               college: user.role
@@ -721,7 +642,7 @@ app.get('/adminProfile/:userId',async (req, res) => {
     
     res.render('adminProfile', {courses, user,users, userId});
 } catch (error) {
-    console.error(error);
+    // console.error(error);
     res.status(500).send('Internal Server Error');
 }
 });
@@ -732,10 +653,9 @@ app.get('/adminUpdate/:userId',async (req, res) => {
     const userId = req.params.userId;
     
     const users = await User.find().exec();
-  // Log the fetched classes to check if they are retrieved
-  // console.log('classes:', classes);
+  
     const user = await User.findById(userId).exec();
-       console.log(user)
+      //  console.log(user)
        const courses = await Course.find({
               
               college: user.role
@@ -746,7 +666,7 @@ app.get('/adminUpdate/:userId',async (req, res) => {
     
     res.render('adminUpdate', {courses, user,users, userId});
 } catch (error) {
-    console.error(error);
+    // console.error(error);
     res.status(500).send('Internal Server Error');
 }
 });
@@ -759,10 +679,9 @@ app.get('/attendance/:userId',async(req,res)=>{
     const userId = req.params.userId;
     
     const users = await User.find().exec();
-  // Log the fetched classes to check if they are retrieved
-  // console.log('classes:', classes);
+  
     const user = await User.findById(userId).exec();
-       console.log(user)
+      //  console.log(user)
        const courses = await Course.find({
               
               college: user.role
@@ -773,15 +692,11 @@ app.get('/attendance/:userId',async(req,res)=>{
     
     res.render('attendance', {courses, user,users, userId});
 } catch (error) {
-    console.error(error);
+    // console.error(error);
     res.status(500).send('Internal Server Error');
 }
 })
 
-// app.get('/forgot-password', (req, res) => {
-//   errorMessage = '';
-//   res.render('register',{ errorMessage});
-// });
 
 
 // update password
@@ -790,8 +705,7 @@ app.post('/forgot-password', async (req, res) => {
     const { email } = req.body;
     const user = await User.findOne({ email });
     if (!user) {
-      // return  res.send('forgot-password not');
-      // res.render('forgot-password', { message: 'User not found' });
+      
       res.status(500).render('register', { errorMessage: "Invalid Email." });
     }
 
@@ -806,11 +720,7 @@ app.post('/forgot-password', async (req, res) => {
 
     // Send an email with the new password
     const transporter = nodemailer.createTransport({
-      // service: 'gmail',
-      // auth: {
-      //   user: 'gautamsingh893591@gmail.com',
-      //   pass: 'tcdencsoubsnhymc'
-      // }
+     
       host: 'smtp.hostinger.com', // Your SMTP server host
       port: 465, // Your SMTP server port (usually 587 for TLS)
       secure: true, // Set to true if your SMTP server requires secure connection (TLS)
@@ -829,47 +739,20 @@ app.post('/forgot-password', async (req, res) => {
 
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
-        console.log(error);
-        // return res.send('forgot-password nnnn');
-        // res.render('forgot-password', { message: 'Failed to send email' });
+        // console.log(error);
+       
         return res.status(500).render('register', { errorMessage: 'Failed to send email' });
       } else {
-        console.log('Email sent: ' + info.response);
-        // return res.send('forgot-password');
+        // console.log('Email sent: ' + info.response);
+        
         return res.status(500).render('register', { errorMessage: "New password sent to your email" });
       }
     });
   } catch (error) {
-    console.log(error);
-    // res.render('forgot-password', { message: 'Failed to reset password' });
-    // res.send('forgot-password no');
+    // console.log(error);
+    
     return res.status(500).render('register', { errorMessage: 'Failed to reset password' });
   }
 });
-
-
-// verification
-
-// app.post('/verify', async (req, res) => {
-//   const { email, otp } = req.body;
-//   try {
-//       const user = await User.findOne({ email });
-//       if (user && user.isVerified === false) {
-//           if (otp === user.otp) {
-//               // Update user's verification status
-//               user.isVerified = true;
-//               await user.save();
-//               res.send('Email verified successfully! You can now login.');
-//           } else {
-//               res.status(400).send('Incorrect OTP. Please try again.');
-//           }
-//       } else {
-//           res.status(400).send('User not found or already verified.');
-//       }
-//   } catch (err) {
-//       console.error(err);
-//       res.status(500).send('Error verifying email');
-//   }
-// });
 
 }

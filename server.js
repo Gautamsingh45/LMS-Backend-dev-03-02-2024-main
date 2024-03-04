@@ -36,11 +36,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'public')));
-db.mongoose.connect(`mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.DB}`, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  })
-// db.mongoose.connect("mongodb+srv://gautamsingh893591:V2jTulad1dfL6bE9@cluster0.vwrm2se.mongodb.net/student?retryWrites=true&w=majority")
+// db.mongoose.connect(`mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.DB}`, {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true
+//   })
+db.mongoose.connect("mongodb+srv://gautamsingh893591:V2jTulad1dfL6bE9@cluster0.vwrm2se.mongodb.net/student?retryWrites=true&w=majority")
   .then(() => {
     console.log("Successfully connect to MongoDB.");
     initial();
