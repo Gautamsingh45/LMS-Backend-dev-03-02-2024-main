@@ -433,7 +433,7 @@ app.get('/course-form/:userId', async (req, res) => {
     // console.log('classes:', classes);
    
       const user = await User.findById(userId).exec();
-         console.log(user)
+        //  console.log(user)
     //      const existingCourse = await Course.findOne({ courseName: 'Master AI and Land Your Dream Job' }).exec();
 
     // if (existingCourse) {
@@ -543,7 +543,8 @@ app.get('/createClass/:userId',async(req,res)=>{
   // console.log('classes:', classes);
     const user = await User.findById(userId).exec();
        console.log(user)
-    res.render('createClass', { user,users, userId});
+       errorMessage = '';
+       res.render('createClass', { user,users, userId,errorMessage});
 } catch (error) {
     console.error(error);
     res.status(500).send('Internal Server Error');
@@ -590,7 +591,7 @@ app.post('/createClass/:userId', async (req, res) => {
       await newClass.save();
       // Redirect to a page or render a response as needed
       const users = await User.find().exec();
-      res.render('createClass', { user,users, userId});
+      res.status(400).render('createClass', { errorMessage: "Course created successfully!" ,user,userId,users});
   } catch (error) {
       console.error(error);
       res.status(500).send('Internal Server Error');
@@ -805,15 +806,22 @@ app.post('/forgot-password', async (req, res) => {
 
     // Send an email with the new password
     const transporter = nodemailer.createTransport({
-      service: 'gmail',
+      // service: 'gmail',
+      // auth: {
+      //   user: 'gautamsingh893591@gmail.com',
+      //   pass: 'tcdencsoubsnhymc'
+      // }
+      host: 'smtp.hostinger.com', // Your SMTP server host
+      port: 465, // Your SMTP server port (usually 587 for TLS)
+      secure: true, // Set to true if your SMTP server requires secure connection (TLS)
       auth: {
-        user: 'gautamsingh893591@gmail.com',
-        pass: 'tcdencsoubsnhymc'
-      }
+        user: 'help.saarthi@blockcept.ai', // Your SMTP username
+        pass: 'Saarthi@1234' // Your SMTP password
+    }
     });
 
     const mailOptions = {
-      from: 'your-email@gmail.com',
+      from: 'Gautam Singh <help.saarthi@blockcept.ai>',
       to: email,
       subject: 'Password Reset',
       text: `Your new password is: ${newPassword}` // This should be encrypted password

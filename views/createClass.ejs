@@ -208,11 +208,48 @@
     <input type="datetime-local" class="input1" id="time" name="time" required>
     <input type="hidden" name="userId" value="<%= userId %>"><br>
     <button type="submit" class="button1">Submit</button>
-    <div id="message"></div>
+    <!-- <div id="message"></div> -->
+    <div id="popupMessage"></div>
   </form>
  
+  <script>
+   // Function to display pop-up modal with error message
+  
+  // Function to close the pop-up modal
+  //registration page
+  function closePopup() {
+   var popupModal = document.getElementById('popupModal');
+   popupModal.style.display = 'none';
+}
 
-<script>
+// Check if the form has been submitted and there's an error message
+var formSubmitted = localStorage.getItem('formSubmitted');
+var errorMessage = "<%= errorMessage %>"; // Get the error message from the server-side
+
+if (formSubmitted && errorMessage) {
+   // Display the error message in the pop-up modal
+   var popupMessage = document.getElementById('popupMessage');
+   popupMessage.innerText = errorMessage;
+
+   // Show the pop-up modal
+   var popupModal = document.getElementById('popupModal');
+   popupModal.style.display = 'block';
+
+   localStorage.removeItem('formSubmitted');
+}
+
+// Listen for form submission
+document.getElementById('createClassForm').addEventListener('submit', function() {
+   // Set a flag in localStorage to indicate that the form has been submitted
+   localStorage.setItem('formSubmitted', true);
+});
+
+
+
+
+
+</script>
+<!-- <script>
   document.getElementById('createClassForm').addEventListener('submit', async (event) => {
     event.preventDefault();
     const form = event.target;
@@ -238,7 +275,7 @@
       messageDiv.style.color = 'red'; // Style for error message
     }
   });
-</script>
+</script> -->
    <!-- <div class="box-container">
 
       <div class="box offer">

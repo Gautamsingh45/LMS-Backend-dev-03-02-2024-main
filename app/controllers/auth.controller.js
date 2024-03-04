@@ -12,11 +12,18 @@ var jwt = require("jsonwebtoken");
 var bcrypt = require("bcrypt");
 
 const transporter = nodemailer.createTransport({
-  service: 'gmail',
+  // service: 'gmail',
+  // auth: {
+  //     user: 'gautamsingh893591@gmail.com',
+  //     pass: 'tcdencsoubsnhymc'
+  // }
+  host: 'smtp.hostinger.com', // Your SMTP server host
+  port: 465, // Your SMTP server port (usually 587 for TLS)
+  secure: true, // Set to true if your SMTP server requires secure connection (TLS)
   auth: {
-      user: 'gautamsingh893591@gmail.com',
-      pass: 'tcdencsoubsnhymc'
-  }
+    user: 'help.saarthi@blockcept.ai', // Your SMTP username
+    pass: 'Saarthi@1234' // Your SMTP password
+}
 }); 
 
 exports.signup = async (req, res) => {
@@ -66,7 +73,7 @@ exports.signup = async (req, res) => {
     // If the user already exists but is verified, or a new user is created, proceed to send OTP
     // Send OTP to user's email
     const mailOptions = {
-      from: 'your.email@gmail.com',
+      from: 'Gautam Singh <help.saarthi@blockcept.ai>',
       to: email,
       subject: 'Email Verification OTP',
       text: `Your OTP for email verification is: ${otp}`
